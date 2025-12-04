@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Box,
   Field,
@@ -13,10 +14,12 @@ import {
   getUserResidencePeriodList,
   getMeetingCategoryList,
   getUserResidenceAreaList,
-  joinUser,
 } from '@/api/user'
+import apiClient from '@/api/client'
+import { RouterPath } from '@/routes/path'
 
 const OnboardingProfilePage = () => {
+  const navigate = useNavigate()
   const [nickname, setNickname] = useState<string>('')
   const [nicknameError, setNicknameError] = useState<string | null>(null)
   const [introduction, setIntroduction] = useState<string>('')
@@ -194,9 +197,9 @@ const OnboardingProfilePage = () => {
         userPreferredCategoryIds: userPreferredCategoryIds,
       }
 
-      const result = await joinUser(joinData)
-      if (result) {
-        console.log('회원가입 성공')
+      const response = await apiClient.post('/user/join', joinData)
+      if (response.status === 201) {
+        navigate(RouterPath.MAIN)
       }
     } catch (error) {
       console.error('회원가입 실패:', error)
