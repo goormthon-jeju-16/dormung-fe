@@ -7,7 +7,7 @@ import NavigationBar from '@/components/NavigationBar/NavigationBar'
 import ConfirmModal from '@/components/Modal/ConfirmModal'
 import { RouterPath } from '@/routes/path'
 import dormungLogo from '@/assets/dormung_logo.svg'
-import characterIntro from '@/assets/character_intro.svg'
+import character from '@/assets/character.svg'
 
 const MainPage = () => {
   const navigate = useNavigate()
@@ -23,20 +23,8 @@ const MainPage = () => {
           background: 'linear-gradient(180deg, #FFFFFF 0%, #CBFFEF 100%)',
         }}
       >
-        <Text
-          typography="heading2"
-          style={{
-            position: 'absolute',
-            top: '55%',
-            left: '46%',
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        >
-          👋
-        </Text>
         <img
-          src={characterIntro}
+          src={character}
           alt="Character Intro Background"
           style={{
             position: 'absolute',
