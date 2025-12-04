@@ -118,3 +118,10 @@ export const getMyMeetingList = async (): Promise<MyMeeting[]> => {
   const response = await apiClient.get<ApiResponse<MyMeeting[]>>("/user/meeting/my/list")
   return response.data.data
 }
+
+export const leaveMeeting = async (meetingId: number): Promise<boolean> => {
+  const response = await apiClient.post<ApiResponse<boolean>>(
+    `/user/meeting/leave/${meetingId}`
+  )
+  return response.data.data
+}

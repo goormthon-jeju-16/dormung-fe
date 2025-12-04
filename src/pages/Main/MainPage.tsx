@@ -8,7 +8,7 @@ import ConfirmModal from '@/components/Modal/ConfirmModal'
 import { RouterPath } from '@/routes/path'
 import dormungLogo from '@/assets/dormung_logo.svg'
 import character from '@/assets/character.svg'
-import { getUserInfo, getMyMeetingList } from '@/api/user'
+import { getUserInfo, getMyMeetingList, leaveMeeting } from '@/api/user'
 import type { MyMeeting } from '@/api/user'
 
 const MainPage = () => {
@@ -160,9 +160,21 @@ const MainPage = () => {
           setIsConfirmModalOpen(false)
           setIsBottomSheetOpen(true)
         }}
-        onLeave={() => {
+        onLeave={async () => {
           setIsConfirmModalOpen(false)
-          navigate(RouterPath.HOME)
+          if (selectedMeetingId) {
+            try {
+              const success = await leaveMeeting(selectedMeetingId)
+              if (success) {
+                setSelectedMeetingId(null)
+                const meetingList = await getMyMeetingList()
+                setMeetings(meetingList)
+                navigate(RouterPath.HOME)
+              }
+            } catch (error) {
+              console.error('모임 탈퇴 실패:', error)
+            }
+          }
         }}
       />
       <NavigationBar />
