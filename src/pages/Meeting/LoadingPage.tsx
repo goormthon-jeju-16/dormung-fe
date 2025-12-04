@@ -1,5 +1,6 @@
 import { Text, VStack } from '@vapor-ui/core'
 import { PulseLoader } from 'react-spinners'
+import character from '@/assets/loading-character.svg'
 
 const LoadingPage = () => {
   return (
@@ -14,6 +15,8 @@ const LoadingPage = () => {
         paddingBottom: 'var(--vapor-size-space-500)',
         paddingLeft: 'var(--vapor-size-space-250)',
         paddingRight: 'var(--vapor-size-space-250)',
+        background:
+          'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 50%, #CBFFEF 100%)',
       }}
     >
       <VStack gap="var(--vapor-size-space-400)" alignItems="center">
@@ -26,14 +29,19 @@ const LoadingPage = () => {
         </Text>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <PulseLoader
-            // color="var(--vapor-color-backgroud-primary-200)"
-            color="pink"
+            color="var(--vapor-color-primary-200)"
             size={8}
             speedMultiplier={0.6}
+            style={{
+              position: 'absolute',
+              top: '350px',
+              left: '182px',
+              zIndex: 2,
+            }}
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <img src="/vite.svg" alt="loading" width={200} height={200} />
+          <img src={character} alt="loading" width={280} height={280} />
         </div>
       </VStack>
     </div>
