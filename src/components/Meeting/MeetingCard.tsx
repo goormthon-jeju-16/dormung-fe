@@ -18,7 +18,7 @@ export const MeetingCard = ({
   return (
     <Card.Root
       style={{
-        border: '1px solid green',
+        border: '1px solid var(--vapor-color-border-normal)',
         backgroundColor: '#ffffff',
         borderRadius: 'var(--vapor-size-borderRadius-300)',
         padding: 'var(--vapor-size-space-200)',

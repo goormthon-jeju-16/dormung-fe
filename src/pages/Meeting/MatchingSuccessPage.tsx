@@ -27,15 +27,27 @@ const MatchingSuccessPage = () => {
           <VStack gap="var(--vapor-size-space-200)">
             <MeetingCard title="취미/여가 활동" duration="신규" />
           </VStack>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Callout.Root
+              colorPalette="contrast"
+              style={{
+                backgroundColor: 'var(--vapor-color-background-secondary-100)',
+                color: 'var(--vapor-color-foreground-secondary-100)',
+                border: 'none',
+              }}
+            >
+              <Callout.Icon>
+                <InfoCircleOutlineIcon />
+              </Callout.Icon>
+              게시판에 들어가 보세요.
+            </Callout.Root>
+          </div>
         </VStack>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Callout.Root colorPalette="contrast">
-            <Callout.Icon>
-              <InfoCircleOutlineIcon />
-            </Callout.Icon>
-            게시판에 들어가 보세요.
-          </Callout.Root>
-        </div>
       </div>
     </>
   )

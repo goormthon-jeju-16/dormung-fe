@@ -83,7 +83,16 @@ export const RecommendBottomSheet = ({
               </Text>
               <Tooltip.Root>
                 <Tooltip.Trigger>
-                  <InfoCircleIcon style={{ cursor: 'pointer' }} />
+                  <Box style={{ display: 'flex', alignItems: 'center' }}>
+                    <InfoCircleIcon
+                      style={{
+                        display: 'block',
+                        cursor: 'pointer',
+                        color: 'var(--vapor-color-foreground-primary-100)',
+                        alignSelf: 'center',
+                      }}
+                    />
+                  </Box>
                 </Tooltip.Trigger>
 
                 <Tooltip.Portal>
@@ -152,6 +161,9 @@ export const RecommendBottomSheet = ({
                   width="100%"
                   onClick={onClose}
                   style={{
+                    backgroundColor:
+                      'var(--vapor-color-background-primary-200)',
+                    color: 'var(--vapor-color-canvas)',
                     paddingLeft: 0,
                     paddingRight: 0,
                   }}
@@ -159,12 +171,14 @@ export const RecommendBottomSheet = ({
                   {leftButtonText}
                 </Button>
                 <Button
-                  colorPalette="primary"
                   variant="fill"
                   size="xl"
                   width="100%"
                   onClick={onRightButtonClick}
                   style={{
+                    backgroundColor:
+                      'var(--vapor-color-background-secondary-200)',
+                    color: 'var(--vapor-color-gray-900)',
                     paddingLeft: 0,
                     paddingRight: 0,
                   }}
