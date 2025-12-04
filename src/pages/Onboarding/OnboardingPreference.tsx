@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Field, Text, TextInput, Button } from '@vapor-ui/core'
+import { Box, Field, TextInput, Button } from '@vapor-ui/core'
 import { SelectButtonGroup } from './components/SelectButtonGroup'
 
 const OnboardingPreference = () => {
@@ -42,9 +42,13 @@ const OnboardingPreference = () => {
         paddingRight: 'var(--vapor-size-space-500)',
       }}
     >
-      <Text render={<h3 />} foreground="normal-200">
+      <Box
+        render={<h3 />}
+        className="text-center"
+        marginBottom="var(--vapor-size-space-200)"
+      >
         관심 니즈 입력
-      </Text>
+      </Box>
 
       <SelectButtonGroup
         label="관심 카테고리는 무엇인가요?"
@@ -70,14 +74,14 @@ const OnboardingPreference = () => {
 
       <Field.Root name="introduction" className="w-full">
         <Box render={<Field.Label />} flexDirection="column" className="gap-2">
-          <Text render={<h5 />} foreground="secondary-100">
-            자기소개 한 마디!
-          </Text>
+          <Box render={<h3 />}>자기소개 한 마디!</Box>
           <TextInput size="lg" placeholder="자기소개를 입력해주세요" />
         </Box>
       </Field.Root>
 
-      <Button colorPalette="primary">다음</Button>
+      <Button colorPalette="primary" size="lg" variant="fill" width="100%">
+        다음
+      </Button>
     </div>
   )
 }

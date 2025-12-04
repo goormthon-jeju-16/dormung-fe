@@ -1,4 +1,4 @@
-import { Button, HStack, Text, VStack, Box } from '@vapor-ui/core'
+import { Button, HStack, VStack, Box } from '@vapor-ui/core'
 
 interface SelectButtonGroupProps {
   label: string
@@ -18,35 +18,21 @@ export const SelectButtonGroup = ({
   multiLine = false,
 }: SelectButtonGroupProps) => {
   return (
-    <VStack className="gap-4">
-      <Text render={<h5 />} foreground="secondary-100">
+    <VStack>
+      <Box marginBottom="$100" render={<h4 />}>
         {label}
-      </Text>
-      {multiLine ? (
-        <Box display="flex" gap={gap} width="100%" style={{ flexWrap: 'wrap' }}>
-          {options.map(option => (
-            <Button
-              key={option.id}
-              variant="fill"
-              size="md"
-              style={{
-                backgroundColor:
-                  selectedValue === option.id ? '#3b82f6' : '#e5e7eb',
-                color: selectedValue === option.id ? '#ffffff' : '#374151',
-                borderRadius: 'var(--vapor-size-space-500)',
-              }}
-              onClick={() => onSelect(option.id)}
-            >
-              {option.label}
-            </Button>
-          ))}
-        </Box>
-      ) : (
-        // 한 줄로 배치
-        <HStack gap={gap}>
-          {options.map(option => (
-            <Box display="inline-block">
+      </Box>
+      <VStack className="gap-4">
+        {multiLine ? (
+          <Box
+            display="flex"
+            gap={gap}
+            width="100%"
+            style={{ flexWrap: 'wrap' }}
+          >
+            {options.map(option => (
               <Button
+                key={option.id}
                 variant="fill"
                 size="md"
                 style={{
@@ -59,10 +45,31 @@ export const SelectButtonGroup = ({
               >
                 {option.label}
               </Button>
-            </Box>
-          ))}
-        </HStack>
-      )}
+            ))}
+          </Box>
+        ) : (
+          // 한 줄로 배치
+          <HStack gap={gap}>
+            {options.map(option => (
+              <Box display="inline-block">
+                <Button
+                  variant="fill"
+                  size="md"
+                  style={{
+                    backgroundColor:
+                      selectedValue === option.id ? '#3b82f6' : '#e5e7eb',
+                    color: selectedValue === option.id ? '#ffffff' : '#374151',
+                    borderRadius: 'var(--vapor-size-space-500)',
+                  }}
+                  onClick={() => onSelect(option.id)}
+                >
+                  {option.label}
+                </Button>
+              </Box>
+            ))}
+          </HStack>
+        )}
+      </VStack>
     </VStack>
   )
 }
