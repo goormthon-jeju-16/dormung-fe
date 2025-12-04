@@ -73,3 +73,27 @@ export const MOCK_COMMENTS: CommentItem[] = [
     comment: '제주 온 지 얼마 안 됐는데 이런 모임 너무 반갑네요!',
   },
 ]
+
+export interface MeetingItem {
+  id: number
+  name: string
+}
+
+export const MOCK_MEETINGS: MeetingItem[] = [
+  {
+    id: 1,
+    name: '제주 카페 투어 모임',
+  },
+  {
+    id: 2,
+    name: '한라산 등산 동호회',
+  },
+  {
+    id: 3,
+    name: '서귀포 해변 러닝',
+  },
+  {
+    id: 4,
+    name: '제주 맛집 탐방단',
+  },
+]

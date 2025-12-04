@@ -5,6 +5,7 @@ import OnboardingProfilePage from '@/pages/Onboarding/OnboardingProfile'
 import OnboardingPreferencePage from '@/pages/Onboarding/OnboardingPreference'
 import LoadingPage from '@/pages/Meeting/LoadingPage'
 import RecommendPage from '@/pages/Meeting/RecommendPage'
+import BoardListPage from '@/pages/Board/BoardList'
 import BoardPage from '@/pages/Board/Board'
 import BoardWritePage from '@/pages/Board/BoardWrite'
 import BoardPostDetailPage from '@/pages/Board/BoardPostDetail'
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.RECOMMEND,
     element: <RecommendPage />,
+  },
+  {
+    path: RouterPath.BOARD_LIST,
+    element: <BoardListPage />,
   },
   {
     path: RouterPath.BOARD,

@@ -13,6 +13,7 @@ import { UserIcon, MoreCommonOutlineIcon } from '@vapor-ui/icons'
 import { CommentList } from '@/pages/Board/components/CommentCard'
 import { CommentBox } from '@/pages/Board/components/CommentBox'
 import { ExitConfirmBottomSheet } from '@/components/Modal/ExitConfirmBottomSheet'
+import NavigationBar from '@/components/NavigationBar/NavigationBar'
 import { RouterPath } from '@/routes/path'
 import { MOCK_COMMENTS } from '@/mockdata/boardData'
 
@@ -117,6 +118,7 @@ const BoardPostDetailPage = () => {
         exitButtonText="삭제하기"
         closeButtonText="닫기"
       />
+      <NavigationBar />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
+import NavigationBar from '@/components/NavigationBar/NavigationBar'
 
 const MainPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
@@ -41,6 +42,7 @@ const MainPage = () => {
           setIsBottomSheetOpen(false)
         }}
       />
+      <NavigationBar />
     </>
   )
 }
