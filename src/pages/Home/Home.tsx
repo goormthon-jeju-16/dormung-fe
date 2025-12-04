@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react'
+//import { useState, useEffect } from 'react'
 import { Text, Button, VStack, HStack } from '@vapor-ui/core'
 import { useNavigate } from 'react-router-dom'
 import dormungLogoWithBorder from '@/assets/logo_border.svg'
 import jejuIsland from '@/assets/jeju_island.svg'
 import jejuTangerine from '@/assets/jeju_tangerine.svg'
 import jejuDol from '@/assets/jeju-dol.svg'
-import { getUserInfo } from '@/api/user'
+//import { getUserInfo } from '@/api/user'
 
 const HomePage = () => {
   const navigate = useNavigate()
-  const [nickname, setNickname] = useState<string>('')
+  //const [nickname, setNickname] = useState<string>('')
 
+  {
+    /*
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -23,6 +25,8 @@ const HomePage = () => {
 
     fetchUserInfo()
   }, [])
+  */
+  }
 
   return (
     <VStack
@@ -48,11 +52,13 @@ const HomePage = () => {
       <Text typography="body1" style={{ textAlign: 'center' }}>
         다양한 사람들이 모여 <br /> 제주를 더 다채롭게 만드는 곳, 도르멍
       </Text>
+      {/*
       {nickname && (
         <Text typography="body1" style={{ textAlign: 'center' }}>
           {nickname}님, 환영합니다!
         </Text>
       )}
+        */}
       <Button
         colorPalette="primary"
         size="lg"
