@@ -1,7 +1,43 @@
+import { useState } from 'react'
 import { TextInput, Box } from '@vapor-ui/core'
 import { SendOutlineIcon } from '@vapor-ui/icons'
+import { createBoardReply } from '@/api/board'
 
-export const CommentBox = () => {
+interface CommentBoxProps {
+  boardId: string
+  onCommentAdded?: () => void
+}
+
+export const CommentBox = ({ boardId, onCommentAdded }: CommentBoxProps) => {
+  const [reply, setReply] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async () => {
+    if (!reply.trim() || isSubmitting) return
+
+    try {
+      setIsSubmitting(true)
+      await createBoardReply({
+        reply: reply.trim(),
+        boardId: boardId,
+      })
+      setReply('')
+      onCommentAdded?.()
+    } catch (error) {
+      console.error('댓글 작성 중 오류가 발생했습니다:', error)
+      // TODO: 에러 처리 (토스트 메시지 등)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit()
+    }
+  }
+
   return (
     <Box
       style={{
@@ -20,16 +56,24 @@ export const CommentBox = () => {
         <TextInput
           placeholder="댓글을 입력해주세요"
           size="lg"
+          value={reply}
+          onChange={e => setReply(e.target.value)}
+          onKeyPress={handleKeyPress}
+          disabled={isSubmitting}
           style={{
             flex: 1,
             border: '0',
           }}
         />
         <SendOutlineIcon
+          onClick={handleSubmit}
           style={{
             marginRight: 'var(--vapor-size-space-150)',
-            cursor: 'pointer',
-            color: 'var(--color-brand-400)',
+            cursor: isSubmitting || !reply.trim() ? 'not-allowed' : 'pointer',
+            color:
+              isSubmitting || !reply.trim()
+                ? 'var(--color-gray-300)'
+                : 'var(--color-brand-400)',
             width: '16px',
             height: '16px',
           }}

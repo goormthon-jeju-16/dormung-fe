@@ -1,22 +1,77 @@
 import { Text, VStack, Button } from '@vapor-ui/core'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { RouterPath } from '@/routes/path'
-import { MOCK_BOARDS } from '@/mockdata/boardData'
+import type { BoardItem } from '@/api/board'
+import { getBoardList } from '@/api/board'
 import { BoardCard } from '@/pages/Board/components/BoardCard'
 import NavigationBar from '@/components/NavigationBar/NavigationBar'
 
 const BoardPage = () => {
   const navigate = useNavigate()
   const { boardId } = useParams<{ boardId: string }>()
+  const [boards, setBoards] = useState<
+    Array<{
+      id: number
+      title: string
+      content: string
+      commentCount: number
+    }>
+  >([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      if (!boardId) return
+
+      try {
+        setLoading(true)
+        const data: BoardItem[] = await getBoardList(Number(boardId))
+        setBoards(
+          data.map(board => ({
+            id: board.id,
+            title: board.title,
+            content: board.content,
+            commentCount: board.boardReplies.length,
+          }))
+        )
+      } catch (error) {
+        console.error('게시판 목록을 불러오는 중 오류가 발생했습니다:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchBoards()
+  }, [boardId])
 
   const handleBoardWrite = () => {
-    navigate(RouterPath.BOARD_WRITE)
+    if (boardId) {
+      navigate(RouterPath.BOARD_WRITE, { state: { boardId } })
+    } else {
+      navigate(RouterPath.BOARD_WRITE)
+    }
   }
 
   const handleCardClick = (cardId: number) => {
     if (boardId) {
       navigate(`/board/${boardId}/${cardId}`)
     }
+  }
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <Text>로딩 중...</Text>
+      </div>
+    )
   }
 
   return (
@@ -36,7 +91,7 @@ const BoardPage = () => {
           어쩌구 게시판
         </Text>
         <VStack>
-          {MOCK_BOARDS.map(board => (
+          {boards.map(board => (
             <BoardCard
               key={board.id}
               id={board.id}

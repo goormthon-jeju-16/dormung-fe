@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { CloseOutlineIcon } from '@vapor-ui/icons'
 import {
   Box,
@@ -12,20 +12,58 @@ import {
   IconButton,
 } from '@vapor-ui/core'
 import { ExitConfirmBottomSheet } from '@/components/Modal/ExitConfirmBottomSheet'
+import { createBoard } from '@/api/board'
+import { RouterPath } from '@/routes/path'
 
 const BoardWritePage = () => {
   const [isExitSheetOpen, setIsExitSheetOpen] = useState(false)
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+
+  // Board.tsx에서 전달된 boardId (실제로는 meetingId)
+  const boardId = location.state?.boardId || ''
 
   const handleClose = () => {
     setIsExitSheetOpen(true)
   }
+
   const handleExit = () => {
     navigate(-1)
   }
 
   const handleCloseSheet = () => {
     setIsExitSheetOpen(false)
+  }
+
+  const handleComplete = async () => {
+    if (!title.trim() || !content.trim()) {
+      alert('제목과 내용을 입력해주세요.')
+      return
+    }
+
+    if (!boardId) {
+      alert('게시판 정보를 찾을 수 없습니다.')
+      return
+    }
+
+    try {
+      setIsSubmitting(true)
+      await createBoard({
+        title: title.trim(),
+        content: content.trim(),
+        meetingId: String(boardId),
+      })
+      // 글 작성 성공 후 게시판 목록으로 이동
+      navigate(RouterPath.BOARD.replace(':boardId', String(boardId)))
+    } catch (error) {
+      console.error('게시판 글 작성 중 오류가 발생했습니다:', error)
+      alert('글 작성에 실패했습니다. 다시 시도해주세요.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -56,11 +94,13 @@ const BoardWritePage = () => {
           </IconButton>
           <Button
             variant="ghost"
+            onClick={handleComplete}
+            disabled={isSubmitting}
             style={{
               color: 'var(--color-foreground-hint-200)',
             }}
           >
-            완료
+            {isSubmitting ? '작성 중...' : '완료'}
           </Button>
         </Flex>
         <Box
@@ -71,6 +111,8 @@ const BoardWritePage = () => {
           <TextInput
             placeholder="제목을 입력하세요."
             size="lg"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
             style={{
               color: 'var(--color-foreground-hint-100)',
               border: 'none',
@@ -84,6 +126,8 @@ const BoardWritePage = () => {
         <Textarea
           placeholder={`모임 회원들과 이야기를 나눠보세요.
 #자기소개 #약속잡기`}
+          value={content}
+          onChange={e => setContent(e.target.value)}
           style={{
             paddingTop: 'var(--vapor-size-space-200)',
             paddingLeft: '0',
