@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   Text,
@@ -19,14 +19,9 @@ import { MOCK_COMMENTS } from '@/mockdata/boardData'
 
 const BoardPostDetailPage = () => {
   const [isDeleteSheetOpen, setIsDeleteSheetOpen] = useState(false)
-  const [commentCount, setCommentCount] = useState(0)
+  const commentCount = MOCK_COMMENTS.length
   const navigate = useNavigate()
-  const { boardId, postId } = useParams<{ boardId: string; postId: string }>()
-
-  //추후 API 호출
-  useEffect(() => {
-    setCommentCount(MOCK_COMMENTS.length)
-  }, [postId])
+  const { boardId } = useParams<{ boardId: string; postId: string }>()
 
   const handleMoreClick = () => {
     setIsDeleteSheetOpen(true)

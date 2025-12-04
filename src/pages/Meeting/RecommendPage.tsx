@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
-import { getRecommendedMeetingList } from '@/api/user'
+import { getRecommendedMeetingList, joinMeeting } from '@/api/user'
 import type { RecommendedMeeting } from '@/api/user'
-import { calculatePeriodLabel } from '@/lib/utils'
 
 const RecommendPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
+  const [selectedMeetingId, setSelectedMeetingId] = useState<number | null>(
+    null
+  )
   const [meetings, setMeetings] = useState<RecommendedMeeting[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -54,13 +56,17 @@ const RecommendPage = () => {
                 <MeetingCard
                   key={meeting.id}
                   title={meeting.name}
-                  duration={calculatePeriodLabel(meeting.createdAt)}
+                  duration={meeting.periodLabel}
                   memberCount={meeting.meetingUsers.length}
                   profileImages={meeting.meetingUsers.map(mu => ({
                     id: mu.user.id,
                     profileImagePath: mu.user.profileImagePath,
                   }))}
-                  onCheckClick={() => setIsBottomSheetOpen(true)}
+                  meetingId={meeting.id}
+                  onCheckClick={meetingId => {
+                    setSelectedMeetingId(meetingId || null)
+                    setIsBottomSheetOpen(true)
+                  }}
                 />
               ))}
             </VStack>
@@ -69,7 +75,25 @@ const RecommendPage = () => {
       </div>
       <RecommendBottomSheet
         isOpen={isBottomSheetOpen}
-        onClose={() => setIsBottomSheetOpen(false)}
+        onClose={() => {
+          setIsBottomSheetOpen(false)
+          setSelectedMeetingId(null)
+        }}
+        meetingId={selectedMeetingId}
+        meetings={meetings}
+        onRightButtonClick={async () => {
+          if (selectedMeetingId) {
+            try {
+              const success = await joinMeeting(selectedMeetingId)
+              if (success) {
+                setIsBottomSheetOpen(false)
+                setSelectedMeetingId(null)
+              }
+            } catch (error) {
+              console.error('모임 가입 실패:', error)
+            }
+          }
+        }}
       />
     </>
   )
