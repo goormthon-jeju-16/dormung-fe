@@ -1,6 +1,5 @@
 import { Box, Button, VStack } from '@vapor-ui/core'
 import { useNavigate } from 'react-router-dom'
-import { RouterPath } from '@/routes/path'
 
 const HomePage = () => {
   const navigate = useNavigate()
