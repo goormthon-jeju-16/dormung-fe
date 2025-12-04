@@ -44,13 +44,6 @@ a {
   text-decoration: none;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
 img {
   max-width: 100%;
   height: auto;
