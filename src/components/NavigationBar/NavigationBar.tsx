@@ -47,6 +47,7 @@ const NavigationBar = () => {
         left: 0,
         right: 0,
         borderTop: '1px solid var(--vapor-color-border-normal)',
+        backgroundColor: '#ffffff',
         zIndex: 1000,
         maxWidth: '393px',
         margin: '0 auto',
