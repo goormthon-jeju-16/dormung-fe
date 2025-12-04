@@ -1,5 +1,7 @@
+import { Text } from '@vapor-ui/core'
+
 const HomePage = () => {
-  return <></>
+  return <Text>Hello World</Text>
 }
 
 export default HomePage
