@@ -1,4 +1,6 @@
 import { Card, Text, Button, Box } from '@vapor-ui/core'
+import { AvatarGroup } from '@/components/animate-ui/components/animate/avatar-group'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 interface MeetingCardProps {
   title: string
@@ -43,30 +45,34 @@ export const MeetingCard = ({
 
       <Box
         style={{
-          display: 'flex',
-          gap: 'var(--vapor-size-space-200)',
           marginBottom: 'var(--vapor-size-space-400)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        {Array.from({ length: memberCount }).map((_, index) => (
-          <Box
-            key={index}
-            style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              backgroundColor: '#f5f5f5',
-              border: '1px dashed var(--color-border-normal)',
-            }}
-          />
-        ))}
+        <AvatarGroup>
+          {Array.from({ length: memberCount }).map((_, index) => (
+            <Avatar
+              key={index}
+              style={{
+                width: '60px',
+                height: '60px',
+                backgroundColor: '#f5f5f5',
+                border: '1px dashed var(--color-border-normal)',
+              }}
+            >
+              <AvatarFallback>{index + 1}</AvatarFallback>
+            </Avatar>
+          ))}
+        </AvatarGroup>
       </Box>
 
       <Box>
         <Button
           colorPalette="primary"
           variant="fill"
-          size="md"
+          size="lg"
           width="100%"
           onClick={onCheckClick}
           style={{
