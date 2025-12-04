@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import { RouterPath } from '@/routes/path'
 import HomePage from '@/pages/Home/Home'
 import OnboardingProfilePage from '@/pages/Onboarding/OnboardingProfile'
-import OnboardingPreferencePage from '@/pages/Onboarding/OnboardingPreference'
 import LoadingPage from '@/pages/Meeting/LoadingPage'
 import RecommendPage from '@/pages/Meeting/RecommendPage'
 import BoardListPage from '@/pages/Board/BoardList'
@@ -20,10 +19,6 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.ONBOARDING_PROFILE,
     element: <OnboardingProfilePage />,
-  },
-  {
-    path: RouterPath.ONBOARDING_PREFERENCE,
-    element: <OnboardingPreferencePage />,
   },
   {
     path: RouterPath.LOADING,
