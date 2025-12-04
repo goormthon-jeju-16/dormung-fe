@@ -24,3 +24,10 @@ export const getMeetingCategoryList = async (): Promise<Category[]> => {
   )
   return response.data.data
 }
+
+export const getUserResidenceAreaList = async (): Promise<string[]> => {
+  const response = await apiClient.get<ApiResponse<string[]>>(
+    '/user/residence-area/list'
+  )
+  return response.data.data
+}

@@ -57,15 +57,20 @@ export const SelectButtonGroup = ({
                     selectedValue === option.id
                       ? 'var(--vapor-color-background-primary-300)'
                       : 'var(--vapor-color-background-secondary-100)',
-                  color:
-                    selectedValue === option.id
-                      ? 'var(--vapor-color-foreground-inverse)'
-                      : 'var(--vapor-color-foreground-secondary-100)',
                   borderRadius: 'var(--vapor-size-space-500)',
                 }}
                 onClick={() => onSelect(option.id)}
               >
-                {showHash ? `#${option.label}` : option.label}
+                <Text
+                  style={{
+                    color:
+                      selectedValue === option.id
+                        ? 'var(--vapor-color-button-foreground-primary)'
+                        : 'var(--vapor-color-foreground-secondary-100)',
+                  }}
+                >
+                  {showHash ? `#${option.label}` : option.label}
+                </Text>
               </Button>
             ))}
           </Box>
@@ -85,15 +90,19 @@ export const SelectButtonGroup = ({
                     selectedValue === option.id
                       ? 'var(--vapor-color-background-primary-200)'
                       : 'var(--vapor-color-background-secondary-100)',
-                  color:
-                    selectedValue === option.id
-                      ? 'var(--vapor-color-button-foreground-primary)'
-                      : 'var(--vapor-color-foreground-secondary-100)',
                   borderRadius: 'var(--vapor-size-space-500)',
                 }}
                 onClick={() => onSelect(option.id)}
               >
-                <Text typography="heading6">
+                <Text
+                  typography="heading6"
+                  style={{
+                    color:
+                      selectedValue === option.id
+                        ? 'var(--vapor-color-button-foreground-primary)'
+                        : 'var(--vapor-color-foreground-secondary-100)',
+                  }}
+                >
                   {showHash ? `# ${option.label}` : option.label}
                 </Text>
               </Button>
