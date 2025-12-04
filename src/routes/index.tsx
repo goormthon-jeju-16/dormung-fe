@@ -5,6 +5,7 @@ import OnboardingProfilePage from '@/pages/Onboarding/OnboardingProfile'
 import OnboardingPreferencePage from '@/pages/Onboarding/OnboardingPreference'
 import LoadingPage from '@/pages/Meeting/LoadingPage'
 import RecommendPage from '@/pages/Meeting/RecommendPage'
+import MatchingSuccessPage from '@/pages/Meeting/MatchingSuccessPage'
 
 export const router = createBrowserRouter([
   {
@@ -26,5 +27,9 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.RECOMMEND,
     element: <RecommendPage />,
+  },
+  {
+    path: RouterPath.MATCHING_SUCCESS,
+    element: <MatchingSuccessPage />,
   },
 ])
