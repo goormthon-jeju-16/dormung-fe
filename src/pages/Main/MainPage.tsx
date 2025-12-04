@@ -34,7 +34,7 @@ const MainPage = () => {
         setNickname(userInfo.nickname)
         setMeetings(meetingList)
       } catch (error) {
-        console.error('데이터 조회 실패:', error)
+        console.error('데이터 조회 실패: ', error)
       } finally {
         setIsLoading(false)
       }
