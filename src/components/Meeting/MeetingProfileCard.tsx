@@ -36,9 +36,10 @@ export const MeetingProfileCard = ({
           }}
         >
           <Avatar
+            className="rounded-md"
             style={{
-              width: '60px',
-              height: '60px',
+              width: '88px',
+              height: '88px',
               backgroundColor: '#f5f5f5',
               border: '1px dashed var(--color-border-normal)',
             }}

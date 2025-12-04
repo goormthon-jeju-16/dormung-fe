@@ -81,7 +81,6 @@ export const RecommendBottomSheet = ({
               <Text typography="body1" foreground="normal-200">
                 새로 생성된 모임이에요!
               </Text>
-
               <Tooltip.Root>
                 <Tooltip.Trigger>
                   <InfoCircleIcon style={{ cursor: 'pointer' }} />
