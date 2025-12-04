@@ -7,7 +7,7 @@ import NavigationBar from '@/components/NavigationBar/NavigationBar'
 import ConfirmModal from '@/components/Modal/ConfirmModal'
 import { RouterPath } from '@/routes/path'
 import dormungLogo from '@/assets/dormung_logo.svg'
-import character from '@/assets/character.svg'
+import character from '@/assets/character_logo.svg'
 import { getUserInfo, getMyMeetingList, leaveMeeting } from '@/api/user'
 import type { MyMeeting } from '@/api/user'
 
