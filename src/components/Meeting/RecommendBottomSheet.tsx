@@ -1,4 +1,13 @@
-import { Sheet, Box, Text, VStack, HStack, Card, Button } from '@vapor-ui/core'
+import {
+  Sheet,
+  Box,
+  Text,
+  VStack,
+  HStack,
+  Card,
+  Button,
+  Tooltip,
+} from '@vapor-ui/core'
 import { MeetingProfileCard } from '@/components/Meeting/MeetingProfileCard'
 import { InfoCircleIcon } from '@vapor-ui/icons'
 
@@ -27,7 +36,18 @@ export const RecommendBottomSheet = ({
       }}
     >
       <Sheet.Content
-        positionerProps={{ side: 'bottom' }}
+        positionerProps={{
+          side: 'bottom',
+          style: {
+            zIndex: 1000,
+            position: 'fixed',
+            left: '50%',
+            bottom: 0,
+            transform: 'translateX(-50%)',
+            width: '100%',
+            maxWidth: '393px',
+          },
+        }}
         overlayProps={{
           style: {
             backgroundColor: 'rgba(0, 0, 0, 0.68)',
@@ -40,7 +60,6 @@ export const RecommendBottomSheet = ({
           maxHeight: '90vh',
           minHeight: '50vh',
           overflowY: 'auto',
-          width: '100%',
         }}
       >
         <Box
@@ -62,8 +81,31 @@ export const RecommendBottomSheet = ({
               <Text typography="body1" foreground="normal-200">
                 새로 생성된 모임이에요!
               </Text>
-              <InfoCircleIcon />
+              <Tooltip.Root>
+                <Tooltip.Trigger>
+                  <InfoCircleIcon style={{ cursor: 'pointer' }} />
+                </Tooltip.Trigger>
+
+                <Tooltip.Portal>
+                  <Tooltip.Positioner>
+                    <Tooltip.Popup>
+                      <Box
+                        style={{
+                          backgroundColor: 'var(--vapor-color-gray-0)',
+                          padding: 'var(--vapor-size-space-150)',
+                          borderRadius: 'var(--vapor-size-borderRadius-200)',
+                        }}
+                      >
+                        <Text typography="body2" foreground="normal-200">
+                          관리자에 의해 새로 생성된 모임이에요!
+                        </Text>
+                      </Box>
+                    </Tooltip.Popup>
+                  </Tooltip.Positioner>
+                </Tooltip.Portal>
+              </Tooltip.Root>
             </HStack>
+
             <Box
               style={{
                 width: '100%',
