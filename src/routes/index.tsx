@@ -8,6 +8,8 @@ import RecommendPage from '@/pages/Meeting/RecommendPage'
 import BoardPage from '@/pages/Board/Board'
 import BoardWritePage from '@/pages/Board/BoardWrite'
 import BoardPostDetailPage from '@/pages/Board/BoardPostDetail'
+import MatchingSuccessPage from '@/pages/Meeting/MatchingSuccessPage'
+import MainPage from '@/pages/Main/MainPage'
 
 export const router = createBrowserRouter([
   {
@@ -41,5 +43,11 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.BOARD_POST_DETAIL,
     element: <BoardPostDetailPage />,
+    path: RouterPath.MATCHING_SUCCESS,
+    element: <MatchingSuccessPage />,
+  },
+  {
+    path: RouterPath.MAIN,
+    element: <MainPage />,
   },
 ])

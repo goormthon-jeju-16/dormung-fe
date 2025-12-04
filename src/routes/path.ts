@@ -8,4 +8,7 @@ export const RouterPath = {
   BOARD: '/board/:boardId',
   BOARD_WRITE: '/board/write',
   BOARD_POST_DETAIL: '/board/:boardId/:postId',
+  
+  MATCHING_SUCCESS: '/matching-success',
+  MAIN: '/main',
 }
