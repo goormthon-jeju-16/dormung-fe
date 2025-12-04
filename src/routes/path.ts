@@ -4,6 +4,11 @@ export const RouterPath = {
   ONBOARDING_PREFERENCE: '/onboardingpreference',
   LOADING: '/loading',
   RECOMMEND: '/recommend',
+
+  BOARD: '/board/:boardId',
+  BOARD_WRITE: '/board/write',
+  BOARD_POST_DETAIL: '/board/:boardId/:postId',
+  
   MATCHING_SUCCESS: '/matching-success',
   MAIN: '/main',
 }
