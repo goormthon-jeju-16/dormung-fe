@@ -21,7 +21,6 @@ const getImageUrl = (imagePath: string): string => {
 interface MeetingProfileCardProps {
   nickname?: string
   profileImagePath?: string
-  residence?: string
   location?: string
   message?: string
   avatarInitial?: string
@@ -30,7 +29,6 @@ interface MeetingProfileCardProps {
 export const MeetingProfileCard = ({
   nickname,
   profileImagePath,
-  residence,
   location,
   message,
   avatarInitial = '1',
@@ -71,22 +69,17 @@ export const MeetingProfileCard = ({
         <VStack>
           {nickname && (
             <Text typography="body2" foreground="normal-200">
-              • 닉네임: {nickname}
-            </Text>
-          )}
-          {residence && (
-            <Text typography="body2" foreground="normal-200">
-              • {residence}
+              닉네임: {nickname}
             </Text>
           )}
           {location && (
             <Text typography="body2" foreground="normal-200">
-              • 거주지: {location}
+              거주지: {location}
             </Text>
           )}
           {message && (
             <Text typography="body2" foreground="normal-200">
-              • 한마디: {message}
+              한마디: {message}
             </Text>
           )}
         </VStack>
