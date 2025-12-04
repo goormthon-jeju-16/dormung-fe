@@ -43,6 +43,8 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.BOARD_POST_DETAIL,
     element: <BoardPostDetailPage />,
+  },
+  {
     path: RouterPath.MATCHING_SUCCESS,
     element: <MatchingSuccessPage />,
   },
