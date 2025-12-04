@@ -4,6 +4,7 @@ import HomePage from '@/pages/Home/Home'
 import OnboardingProfilePage from '@/pages/Onboarding/OnboardingProfile'
 import OnboardingPreferencePage from '@/pages/Onboarding/OnboardingPreference'
 import LoadingPage from '@/pages/Meeting/LoadingPage'
+import RecommendPage from '@/pages/Meeting/RecommendPage'
 
 export const router = createBrowserRouter([
   {
@@ -21,5 +22,9 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.LOADING,
     element: <LoadingPage />,
+  },
+  {
+    path: RouterPath.RECOMMEND,
+    element: <RecommendPage />,
   },
 ])

@@ -3,4 +3,5 @@ export const RouterPath = {
   ONBOARDING_PROFILE: '/onboardingprofile',
   ONBOARDING_PREFERENCE: '/onboardingpreference',
   LOADING: '/loading',
+  RECOMMEND: '/recommend',
 }
