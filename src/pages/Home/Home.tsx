@@ -1,5 +1,9 @@
-import { Box, Button, VStack } from '@vapor-ui/core'
+import { Text, Button, VStack, HStack } from '@vapor-ui/core'
 import { useNavigate } from 'react-router-dom'
+import dormungLogoWithBorder from '@/assets/logo_border.svg'
+import jejuIsland from '@/assets/jeju_island.svg'
+import jejuTangerine from '@/assets/jeju_tangerine.svg'
+import jejuDol from '@/assets/jeju-dol.svg'
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -15,10 +19,19 @@ const HomePage = () => {
         width: '100%',
       }}
     >
-      <Box render={<h3 />}>도르멍</Box>
-      <Box render={<p />}>
-        우리 서비스는 어쩌구 입니다. <br /> 어떻게 서비스를 시작해보아요
-      </Box>
+      <VStack
+        style={{ marginBottom: 'calc(-1 * var(--vapor-size-space-100))' }}
+      >
+        <img src={jejuTangerine} alt="Jeju Tangerine" />
+      </VStack>
+      <HStack gap="$300">
+        <img src={jejuIsland} alt="Jeju Island" />
+        <img src={dormungLogoWithBorder} alt="Border Dormung" />
+        <img src={jejuDol} alt="Jeju Dol" />
+      </HStack>
+      <Text typography="body1" style={{ textAlign: 'center' }}>
+        다양한 사람들이 모여 <br /> 제주를 더 다채롭게 만드는 곳, 도르멍
+      </Text>
       <Button
         colorPalette="primary"
         size="lg"
