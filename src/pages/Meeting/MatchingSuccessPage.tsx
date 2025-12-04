@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { ChevronLeftOutlineIcon } from '@vapor-ui/icons'
@@ -8,8 +8,10 @@ import { InfoCircleOutlineIcon } from '@vapor-ui/icons'
 import NavigationBar from '@/components/NavigationBar/NavigationBar'
 import { getMeetingDetail } from '@/api/user'
 import type { RecommendedMeeting } from '@/api/user'
+import { RouterPath } from '@/routes/path'
 
 const MatchingSuccessPage = () => {
+  const navigate = useNavigate()
   const { meetingId } = useParams<{ meetingId: string }>()
   const [meeting, setMeeting] = useState<RecommendedMeeting | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -67,6 +69,10 @@ const MatchingSuccessPage = () => {
                   id: mu.user.id,
                   profileImagePath: mu.user.profileImagePath,
                 }))}
+                meetingId={meeting.id}
+                onCheckClick={() => {
+                  navigate(`${RouterPath.MAIN}?meetingId=${meeting.id}`)
+                }}
               />
             ) : (
               <MeetingCard title="취미/여가 활동" duration="신규" />
