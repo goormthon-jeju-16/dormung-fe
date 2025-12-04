@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { ChevronLeftOutlineIcon } from '@vapor-ui/icons'
@@ -6,8 +5,6 @@ import { Callout } from '@vapor-ui/core'
 import { InfoCircleOutlineIcon } from '@vapor-ui/icons'
 
 const MatchingSuccessPage = () => {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
-
   return (
     <>
       <div
@@ -28,11 +25,7 @@ const MatchingSuccessPage = () => {
             만남이 성사됐어요!
           </Text>
           <VStack gap="var(--vapor-size-space-200)">
-            <MeetingCard
-              title="취미/여가 활동"
-              duration="신규"
-              onCheckClick={() => setIsBottomSheetOpen(true)}
-            />
+            <MeetingCard title="취미/여가 활동" duration="신규" />
           </VStack>
         </VStack>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
