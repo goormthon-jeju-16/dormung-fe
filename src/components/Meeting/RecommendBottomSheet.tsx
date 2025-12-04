@@ -5,11 +5,17 @@ import { InfoCircleIcon } from '@vapor-ui/icons'
 interface RecommendBottomSheetProps {
   isOpen: boolean
   onClose: () => void
+  leftButtonText?: string
+  rightButtonText?: string
+  onRightButtonClick?: () => void
 }
 
 export const RecommendBottomSheet = ({
   isOpen,
   onClose,
+  leftButtonText = '닫기',
+  rightButtonText = '수락하기',
+  onRightButtonClick,
 }: RecommendBottomSheetProps) => {
   return (
     <Sheet.Root
@@ -108,19 +114,20 @@ export const RecommendBottomSheet = ({
                     paddingRight: 0,
                   }}
                 >
-                  닫기
+                  {leftButtonText}
                 </Button>
                 <Button
                   colorPalette="primary"
                   variant="fill"
                   size="xl"
                   width="100%"
+                  onClick={onRightButtonClick}
                   style={{
                     paddingLeft: 0,
                     paddingRight: 0,
                   }}
                 >
-                  수락하기
+                  {rightButtonText}
                 </Button>
               </HStack>
             </Card.Footer>
