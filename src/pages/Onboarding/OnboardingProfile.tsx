@@ -177,6 +177,11 @@ const OnboardingProfilePage = () => {
     return isNicknameValid && isIntroductionValid && isRequiredSelected
   }
 
+  const getRandomProfileImage = () => {
+    const randomIndex = Math.floor(Math.random() * 4) + 1
+    return `assets/dori-${randomIndex}.png`
+  }
+
   const handleJoin = async () => {
     if (!isFormValid()) {
       return
@@ -193,7 +198,7 @@ const OnboardingProfilePage = () => {
         nickname: nickname,
         residencePeriod: residencePeriod,
         introduceSelf: introduction,
-        profileImagePath: '/public/images/profile.png',
+        profileImagePath: getRandomProfileImage(),
         userPreferredCategoryIds: userPreferredCategoryIds,
       }
 

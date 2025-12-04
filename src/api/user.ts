@@ -48,3 +48,40 @@ export const joinUser = async (data: JoinRequest): Promise<boolean> => {
   )
   return response.data.data
 }
+
+interface MeetingUser {
+  id: number
+  user: {
+    id: number
+    nickname: string
+    profileImagePath: string
+  }
+}
+
+export interface RecommendedMeeting {
+  id: number
+  name: string
+  area: string
+  isActive: number
+  createdAt: string
+  periodLabel: string
+  meetingUsers: MeetingUser[]
+}
+
+export const getRecommendedMeetingList = async (): Promise<
+  RecommendedMeeting[]
+> => {
+  const response = await apiClient.get<ApiResponse<RecommendedMeeting[]>>(
+    '/user/meeting/recommend/list'
+  )
+  return response.data.data
+}
+
+export const getMeetingDetail = async (
+  meetingId: number
+): Promise<RecommendedMeeting> => {
+  const response = await apiClient.get<ApiResponse<RecommendedMeeting>>(
+    `/user/meeting/${meetingId}`
+  )
+  return response.data.data
+}
