@@ -51,6 +51,16 @@ function AvatarContainer({
               initial: { y: 0 },
               hover: { y: translate },
             }}
+            style={{
+              borderRadius: '50%',
+              border: '1px solid black',
+              overflow: 'hidden',
+              width: 40,
+              height: 40,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
             {...props}
           />
         </motion.div>
@@ -114,6 +124,9 @@ function AvatarGroup({
             sideOffset={sideOffset}
             align={align}
             alignOffset={alignOffset}
+            style={{
+              marginLeft: index === 0 ? 0 : '-12px',
+            }}
           >
             {child}
           </AvatarContainer>
