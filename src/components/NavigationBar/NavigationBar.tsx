@@ -46,8 +46,7 @@ const NavigationBar = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'var(--color-background-normal)',
-        borderTop: '1px solid var(--color-border-normal)',
+        borderTop: '1px solid var(--vapor-color-border-normal)',
         zIndex: 1000,
         maxWidth: '393px',
         margin: '0 auto',
@@ -79,7 +78,7 @@ const NavigationBar = () => {
                 style={{
                   color: isActive
                     ? 'var(--vapor-color-primary-200)'
-                    : 'var(--vapor-color-normal-200)',
+                    : 'var(--vapor-color-gray-300)',
                 }}
               />
 
@@ -88,7 +87,7 @@ const NavigationBar = () => {
                 style={{
                   color: isActive
                     ? 'var(--vapor-color-primary-200)'
-                    : 'var(--vapor-color-normal-200)',
+                    : 'var(--vapor-color-gray-300)',
                 }}
               >
                 {item.label}
