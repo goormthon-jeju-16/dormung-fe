@@ -179,7 +179,7 @@ const OnboardingProfilePage = () => {
 
   const getRandomProfileImage = () => {
     const randomIndex = Math.floor(Math.random() * 4) + 1
-    return `assets/dori-${randomIndex}.png`
+    return `public/dori-${randomIndex}.png`
   }
 
   const handleJoin = async () => {
