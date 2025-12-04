@@ -2,7 +2,6 @@ import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { ChevronLeftOutlineIcon } from '@vapor-ui/icons'
 import { Callout } from '@vapor-ui/core'
-import { InfoCircleOutlineIcon } from '@vapor-ui/icons'
 import NavigationBar from '@/components/NavigationBar/NavigationBar'
 
 const MatchingSuccessPage = () => {
@@ -40,11 +39,12 @@ const MatchingSuccessPage = () => {
                 backgroundColor: 'var(--vapor-color-background-secondary-100)',
                 color: 'var(--vapor-color-foreground-secondary-100)',
                 border: 'none',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
-              <Callout.Icon>
-                <InfoCircleOutlineIcon />
-              </Callout.Icon>
               게시판에 들어가 보세요.
             </Callout.Root>
           </div>

@@ -1,5 +1,4 @@
 import { Box, HStack, VStack, Text } from '@vapor-ui/core'
-import { MOCK_COMMENTS } from '@/mockdata/boardData'
 
 interface CommentCardProps {
   nickname: string
@@ -22,10 +21,10 @@ export const CommentCard = ({ nickname, comment }: CommentCardProps) => {
         backgroundColor="$gray-050"
       />
 
-      <VStack gap="$50">
+      <VStack gap="$100">
         <Text typography="heading6">{nickname}</Text>
         <Text
-          marginBottom="var(--vapor-size-space-200)"
+          marginBottom="var(--vapor-size-space-075)"
           typography="body2"
           foreground="normal-200"
         >
@@ -36,14 +35,24 @@ export const CommentCard = ({ nickname, comment }: CommentCardProps) => {
   )
 }
 
-export const CommentList = () => {
+interface CommentListProps {
+  comments: Array<{
+    id: number
+    reply: string
+    user: {
+      nickname: string
+    }
+  }>
+}
+
+export const CommentList = ({ comments }: CommentListProps) => {
   return (
     <VStack gap="$200">
-      {MOCK_COMMENTS.map(comment => (
+      {comments.map(comment => (
         <CommentCard
           key={comment.id}
-          nickname={comment.nickname}
-          comment={comment.comment}
+          nickname={comment.user.nickname}
+          comment={comment.reply}
         />
       ))}
     </VStack>
