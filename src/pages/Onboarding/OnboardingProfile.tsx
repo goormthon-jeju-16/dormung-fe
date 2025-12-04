@@ -13,6 +13,7 @@ import {
   getUserResidencePeriodList,
   getMeetingCategoryList,
   getUserResidenceAreaList,
+  joinUser,
 } from '@/api/user'
 
 const OnboardingProfilePage = () => {
@@ -144,6 +145,9 @@ const OnboardingProfilePage = () => {
           label: area,
         }))
         setRegions(formattedRegions)
+        if (formattedRegions.length > 0) {
+          setSelectedRegion(prev => prev || formattedRegions[0].value)
+        }
       } catch (error) {
         console.error('거주지역 리스트 조회 실패:', error)
         setRegions([])
@@ -168,6 +172,35 @@ const OnboardingProfilePage = () => {
       selectedPeriod !== null && selectedAge !== null && selectedRegion !== null
 
     return isNicknameValid && isIntroductionValid && isRequiredSelected
+  }
+
+  const handleJoin = async () => {
+    if (!isFormValid()) {
+      return
+    }
+
+    try {
+      const selectedPeriodData = periods.find(p => p.id === selectedPeriod)
+      const residencePeriod = selectedPeriodData?.label || ''
+
+      const userPreferredCategoryIds = selectedAge ? [Number(selectedAge)] : []
+
+      const joinData = {
+        residenceArea: selectedRegion || '',
+        nickname: nickname,
+        residencePeriod: residencePeriod,
+        introduceSelf: introduction,
+        profileImagePath: '/public/images/profile.png',
+        userPreferredCategoryIds: userPreferredCategoryIds,
+      }
+
+      const result = await joinUser(joinData)
+      if (result) {
+        console.log('회원가입 성공')
+      }
+    } catch (error) {
+      console.error('회원가입 실패:', error)
+    }
   }
 
   return (
@@ -243,13 +276,18 @@ const OnboardingProfilePage = () => {
         {!isLoadingRegions && (
           <Select.Root
             size="lg"
-            placeholder="지역 선택"
-            value={selectedRegion || undefined}
+            value={selectedRegion || regions[0]?.value || undefined}
             onValueChange={(value: unknown) =>
               setSelectedRegion(value as string)
             }
           >
-            <Select.Trigger />
+            <Select.Trigger>
+              {selectedRegion
+                ? regions.find(r => r.value === selectedRegion)?.label ||
+                  regions[0]?.label ||
+                  '지역 선택'
+                : regions[0]?.label || '지역 선택'}
+            </Select.Trigger>
             <Select.Positioner>
               <Select.Popup>
                 <Select.Group>
@@ -302,6 +340,7 @@ const OnboardingProfilePage = () => {
         variant="fill"
         width="100%"
         disabled={!isFormValid()}
+        onClick={handleJoin}
       >
         다음
       </Button>

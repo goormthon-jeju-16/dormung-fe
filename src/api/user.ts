@@ -31,3 +31,20 @@ export const getUserResidenceAreaList = async (): Promise<string[]> => {
   )
   return response.data.data
 }
+
+interface JoinRequest {
+  residenceArea: string
+  nickname: string
+  residencePeriod: string
+  introduceSelf: string
+  profileImagePath: string
+  userPreferredCategoryIds: number[]
+}
+
+export const joinUser = async (data: JoinRequest): Promise<boolean> => {
+  const response = await apiClient.post<ApiResponse<boolean>>(
+    '/user/join',
+    data
+  )
+  return response.data.data
+}
