@@ -25,7 +25,6 @@ export const CommentBox = ({ boardId, onCommentAdded }: CommentBoxProps) => {
       onCommentAdded?.()
     } catch (error) {
       console.error('댓글 작성 중 오류가 발생했습니다:', error)
-      // TODO: 에러 처리 (토스트 메시지 등)
     } finally {
       setIsSubmitting(false)
     }
@@ -41,8 +40,15 @@ export const CommentBox = ({ boardId, onCommentAdded }: CommentBoxProps) => {
   return (
     <Box
       style={{
+        position: 'fixed',
+        bottom: '80px',
+        left: 0,
+        right: 0,
+        paddingLeft: 'var(--vapor-size-space-250)',
+        paddingRight: 'var(--vapor-size-space-250)',
         borderTop: '1px solid var(--color-gray-50)',
         backgroundColor: 'var(--color-background-normal)',
+        boxSizing: 'border-box',
       }}
     >
       <Box

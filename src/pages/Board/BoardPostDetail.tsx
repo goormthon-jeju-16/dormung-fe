@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import {
   Text,
   Badge,
@@ -19,6 +19,9 @@ import { getBoardDetail, deleteBoard } from '@/api/board'
 import { type BoardDetail } from '@/api/board'
 
 const BoardPostDetailPage = () => {
+  const location = useLocation()
+  const meetingName =
+    (location.state as { meetingName?: string })?.meetingName || '게시판'
   const [isDeleteSheetOpen, setIsDeleteSheetOpen] = useState(false)
   const [commentCount, setCommentCount] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -135,7 +138,7 @@ const BoardPostDetailPage = () => {
         paddingRight: 'var(--vapor-size-space-250)',
       }}
     >
-      <Text typography="heading3">어쩌구 게시판</Text>
+      <Text typography="heading3">{meetingName}</Text>
       <VStack gap="$050">
         <Flex alignItems="center" justifyContent="space-between">
           <Badge

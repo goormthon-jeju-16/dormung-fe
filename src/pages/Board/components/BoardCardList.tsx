@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react'
 import { Box, Flex, Text, Button, VStack } from '@vapor-ui/core'
 import { useNavigate } from 'react-router-dom'
-import { MOCK_MEETINGS } from '@/mockdata/boardData'
+import { getMyMeetingList } from '@/api/user'
 
 interface BoardCardListProps {
   meetingName: string
@@ -45,18 +46,41 @@ export const BoardCardListItem = ({
 
 export const BoardCardList = () => {
   const navigate = useNavigate()
+  const [meetings, setMeetings] = useState<{ id: number; name: string }[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const handleEnter = (meetingId: number) => {
-    navigate(`/board/${meetingId}`)
+  useEffect(() => {
+    const fetchMeetings = async () => {
+      try {
+        const data = await getMyMeetingList()
+        setMeetings(
+          data.map(meeting => ({ id: meeting.id, name: meeting.name }))
+        )
+      } catch (error) {
+        console.error('모임 목록을 불러오는 중 오류가 발생했습니다:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchMeetings()
+  }, [])
+
+  const handleEnter = (meetingId: number, meetingName: string) => {
+    navigate(`/board/${meetingId}`, { state: { meetingName } })
+  }
+
+  if (loading) {
+    return <Text>로딩 중...</Text>
   }
 
   return (
     <VStack gap="$175">
-      {MOCK_MEETINGS.map(meeting => (
+      {meetings.map(meeting => (
         <BoardCardListItem
           key={meeting.id}
           meetingName={meeting.name}
-          onEnter={() => handleEnter(meeting.id)}
+          onEnter={() => handleEnter(meeting.id, meeting.name)}
         />
       ))}
     </VStack>

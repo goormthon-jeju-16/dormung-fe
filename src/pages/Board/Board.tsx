@@ -1,5 +1,5 @@
 import { Text, VStack, Button } from '@vapor-ui/core'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { RouterPath } from '@/routes/path'
 import type { BoardItem } from '@/api/board'
@@ -9,6 +9,9 @@ import NavigationBar from '@/components/NavigationBar/NavigationBar'
 
 const BoardPage = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const meetingName =
+    (location.state as { meetingName?: string })?.meetingName || '게시판'
   const { boardId } = useParams<{ boardId: string }>()
   const [boards, setBoards] = useState<
     Array<{
@@ -47,15 +50,15 @@ const BoardPage = () => {
 
   const handleBoardWrite = () => {
     if (boardId) {
-      navigate(RouterPath.BOARD_WRITE, { state: { boardId } })
+      navigate(RouterPath.BOARD_WRITE, { state: { boardId, meetingName } })
     } else {
-      navigate(RouterPath.BOARD_WRITE)
+      navigate(RouterPath.BOARD_WRITE, { state: { meetingName } })
     }
   }
 
   const handleCardClick = (cardId: number) => {
     if (boardId) {
-      navigate(`/board/${boardId}/${cardId}`)
+      navigate(`/board/${boardId}/${cardId}`, { state: { meetingName } })
     }
   }
 
@@ -88,7 +91,7 @@ const BoardPage = () => {
         }}
       >
         <Text typography="heading3" marginBottom="$200">
-          어쩌구 게시판
+          {meetingName}
         </Text>
         <VStack>
           {boards.map(board => (
