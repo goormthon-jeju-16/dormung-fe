@@ -55,7 +55,8 @@ export interface MeetingUser {
     nickname: string
     profileImagePath: string
     residenceArea?: string
-    introduceSelf?: string  }
+    introduceSelf?: string
+  }
 }
 
 export interface RecommendedMeeting {
@@ -99,9 +100,11 @@ export interface UserInfo {
   residencePeriod: string
   introduceSelf: string
   profileImagePath: string
-}  const response = await apiClient.get<ApiResponse<UserInfo>>("/user/info")
+}
 
-export const getUserInfo = async (): Promise<UserInfo> => {  return response.data.data
+export const getUserInfo = async (): Promise<UserInfo> => {
+  const response = await apiClient.get<ApiResponse<UserInfo>>('/user/info')
+  return response.data.data
 }
 
 export interface MyMeeting {
@@ -113,7 +116,9 @@ export interface MyMeeting {
 }
 
 export const getMyMeetingList = async (): Promise<MyMeeting[]> => {
-  const response = await apiClient.get<ApiResponse<MyMeeting[]>>("/user/meeting/my/list")
+  const response = await apiClient.get<ApiResponse<MyMeeting[]>>(
+    '/user/meeting/my/list'
+  )
   return response.data.data
 }
 
