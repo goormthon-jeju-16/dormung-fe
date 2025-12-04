@@ -1,13 +1,18 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Text, VStack, Box } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
 import NavigationBar from '@/components/NavigationBar/NavigationBar'
+import ConfirmModal from '@/components/Modal/ConfirmModal'
+import { RouterPath } from '@/routes/path'
 import dormungLogo from '@/assets/dormung_logo.svg'
-import characterIntro from '@/assets/character_intro.svg'
+import character from '@/assets/character.svg'
 
 const MainPage = () => {
+  const navigate = useNavigate()
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
   return (
     <>
@@ -18,20 +23,8 @@ const MainPage = () => {
           background: 'linear-gradient(180deg, #FFFFFF 0%, #CBFFEF 100%)',
         }}
       >
-        <Text
-          typography="heading2"
-          style={{
-            position: 'absolute',
-            top: '55%',
-            left: '46%',
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        >
-          👋
-        </Text>
         <img
-          src={characterIntro}
+          src={character}
           alt="Character Intro Background"
           style={{
             position: 'absolute',
@@ -95,6 +88,18 @@ const MainPage = () => {
         rightButtonText="탈퇴하기"
         onRightButtonClick={() => {
           setIsBottomSheetOpen(false)
+          setIsConfirmModalOpen(true)
+        }}
+      />
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        onClose={() => {
+          setIsConfirmModalOpen(false)
+          setIsBottomSheetOpen(true)
+        }}
+        onLeave={() => {
+          setIsConfirmModalOpen(false)
+          navigate(RouterPath.HOME)
         }}
       />
       <NavigationBar />
