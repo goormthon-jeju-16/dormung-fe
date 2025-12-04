@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
 import { getRecommendedMeetingList, joinMeeting } from '@/api/user'
 import type { RecommendedMeeting } from '@/api/user'
+import { RouterPath } from '@/routes/path'
 import LoadingPage from './LoadingPage'
 
 const RecommendPage = () => {
+  const navigate = useNavigate()
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
   const [selectedMeetingId, setSelectedMeetingId] = useState<number | null>(
     null
@@ -87,6 +90,12 @@ const RecommendPage = () => {
               if (success) {
                 setIsBottomSheetOpen(false)
                 setSelectedMeetingId(null)
+                navigate(
+                  RouterPath.MATCHING_SUCCESS.replace(
+                    ':meetingId?',
+                    String(selectedMeetingId)
+                  )
+                )
               }
             } catch (error) {
               console.error('모임 가입 실패:', error)

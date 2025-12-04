@@ -144,6 +144,8 @@ export const RecommendBottomSheet = ({
                     key={mu.user.id}
                     nickname={mu.user.nickname}
                     profileImagePath={mu.user.profileImagePath}
+                    location={mu.user.residenceArea}
+                    message={mu.user.introduceSelf}
                     avatarInitial={String(index + 1)}
                   />
                 ))

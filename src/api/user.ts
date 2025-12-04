@@ -38,7 +38,6 @@ interface JoinRequest {
   residencePeriod: string
   introduceSelf: string
   profileImagePath: string
-  userPreferredCategoryIds: number[]
 }
 
 export const joinUser = async (data: JoinRequest): Promise<boolean> => {
@@ -49,13 +48,14 @@ export const joinUser = async (data: JoinRequest): Promise<boolean> => {
   return response.data.data
 }
 
-interface MeetingUser {
+export interface MeetingUser {
   id: number
   user: {
     id: number
     nickname: string
     profileImagePath: string
-  }
+    residenceArea?: string
+    introduceSelf?: string  }
 }
 
 export interface RecommendedMeeting {
@@ -99,11 +99,9 @@ export interface UserInfo {
   residencePeriod: string
   introduceSelf: string
   profileImagePath: string
-}
+}  const response = await apiClient.get<ApiResponse<UserInfo>>("/user/info")
 
-export const getUserInfo = async (): Promise<UserInfo> => {
-  const response = await apiClient.get<ApiResponse<UserInfo>>("/user/info")
-  return response.data.data
+export const getUserInfo = async (): Promise<UserInfo> => {  return response.data.data
 }
 
 export interface MyMeeting {

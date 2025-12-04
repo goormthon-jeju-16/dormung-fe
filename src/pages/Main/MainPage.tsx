@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Text, VStack, Box } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
@@ -13,6 +13,7 @@ import type { MyMeeting } from '@/api/user'
 
 const MainPage = () => {
   const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
   const [nickname, setNickname] = useState<string>('')
@@ -41,6 +42,19 @@ const MainPage = () => {
 
     fetchData()
   }, [])
+
+  useEffect(() => {
+    const meetingIdParam = searchParams.get('meetingId')
+    if (meetingIdParam && meetings.length > 0) {
+      const meetingId = Number(meetingIdParam)
+      setSearchParams({}, { replace: true })
+      const meetingExists = meetings.some(m => m.id === meetingId)
+      if (meetingExists) {
+        setSelectedMeetingId(meetingId)
+        setIsBottomSheetOpen(true)
+      }
+    }
+  }, [searchParams, setSearchParams, meetings])
 
   return (
     <>
