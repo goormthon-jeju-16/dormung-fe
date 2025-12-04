@@ -19,7 +19,7 @@ const NavigationBar = () => {
       id: 'recommend',
       label: '추천매칭',
       icon: HomeIcon,
-      path: RouterPath.ONBOARDING_PROFILE,
+      path: RouterPath.RECOMMEND,
     },
     {
       id: 'board',

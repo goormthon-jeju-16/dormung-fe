@@ -4,6 +4,7 @@ import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
 import { getRecommendedMeetingList, joinMeeting } from '@/api/user'
 import type { RecommendedMeeting } from '@/api/user'
+import LoadingPage from './LoadingPage'
 
 const RecommendPage = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false)
@@ -47,9 +48,7 @@ const RecommendPage = () => {
             이런 모임은 어떠세요?
           </Text>
           {isLoading ? (
-            <Text typography="body1" foreground="secondary-200">
-              로딩 중...
-            </Text>
+            <LoadingPage />
           ) : (
             <VStack gap="var(--vapor-size-space-200)">
               {meetings.map(meeting => (

@@ -92,3 +92,36 @@ export const joinMeeting = async (meetingId: number): Promise<boolean> => {
   )
   return response.data.data
 }
+
+export interface UserInfo {
+  residenceArea: string
+  nickname: string
+  residencePeriod: string
+  introduceSelf: string
+  profileImagePath: string
+}
+
+export const getUserInfo = async (): Promise<UserInfo> => {
+  const response = await apiClient.get<ApiResponse<UserInfo>>("/user/info")
+  return response.data.data
+}
+
+export interface MyMeeting {
+  id: number
+  name: string
+  area: string
+  isActive: number
+  meetingUsers: MeetingUser[]
+}
+
+export const getMyMeetingList = async (): Promise<MyMeeting[]> => {
+  const response = await apiClient.get<ApiResponse<MyMeeting[]>>("/user/meeting/my/list")
+  return response.data.data
+}
+
+export const leaveMeeting = async (meetingId: number): Promise<boolean> => {
+  const response = await apiClient.post<ApiResponse<boolean>>(
+    `/user/meeting/leave/${meetingId}`
+  )
+  return response.data.data
+}
