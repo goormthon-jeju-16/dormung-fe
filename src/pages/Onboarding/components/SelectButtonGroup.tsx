@@ -1,4 +1,4 @@
-import { Button, HStack, VStack, Box } from '@vapor-ui/core'
+import { Button, HStack, VStack, Box, Text } from '@vapor-ui/core'
 
 interface SelectButtonGroupProps {
   label: string
@@ -7,6 +7,8 @@ interface SelectButtonGroupProps {
   onSelect: (value: string) => void
   gap?: string
   multiLine?: boolean
+  helperText?: string
+  showHash?: boolean
 }
 
 export const SelectButtonGroup = ({
@@ -16,12 +18,27 @@ export const SelectButtonGroup = ({
   onSelect,
   gap = '$100',
   multiLine = false,
+  helperText,
+  showHash = false,
 }: SelectButtonGroupProps) => {
   return (
     <VStack>
-      <Box marginBottom="$100" render={<h4 />}>
-        {label}
+      <Box marginBottom="$100">
+        <Text typography="heading5">{label}</Text>
+        <br />
+        {helperText && (
+          <Text
+            typography="body2"
+            style={{
+              marginTop: '4px',
+              color: 'var(--vapor-color-foreground-primary-200)',
+            }}
+          >
+            {helperText}
+          </Text>
+        )}
       </Box>
+
       <VStack className="gap-4">
         {multiLine ? (
           <Box
@@ -37,35 +54,58 @@ export const SelectButtonGroup = ({
                 size="md"
                 style={{
                   backgroundColor:
-                    selectedValue === option.id ? '#3b82f6' : '#e5e7eb',
-                  color: selectedValue === option.id ? '#ffffff' : '#374151',
+                    selectedValue === option.id
+                      ? 'var(--vapor-color-background-primary-300)'
+                      : 'var(--vapor-color-background-secondary-100)',
                   borderRadius: 'var(--vapor-size-space-500)',
                 }}
                 onClick={() => onSelect(option.id)}
               >
-                {option.label}
+                <Text
+                  style={{
+                    color:
+                      selectedValue === option.id
+                        ? 'var(--vapor-color-button-foreground-primary)'
+                        : 'var(--vapor-color-foreground-secondary-100)',
+                  }}
+                >
+                  {showHash ? `#${option.label}` : option.label}
+                </Text>
               </Button>
             ))}
           </Box>
         ) : (
-          // 한 줄로 배치
-          <HStack gap={gap}>
+          <HStack
+            gap={gap}
+            width="100%"
+            style={{ flexWrap: 'wrap', overflow: 'hidden' }}
+          >
             {options.map(option => (
-              <Box display="inline-block">
-                <Button
-                  variant="fill"
-                  size="md"
+              <Button
+                key={option.id}
+                variant="fill"
+                size="md"
+                style={{
+                  backgroundColor:
+                    selectedValue === option.id
+                      ? 'var(--vapor-color-background-primary-200)'
+                      : 'var(--vapor-color-background-secondary-100)',
+                  borderRadius: 'var(--vapor-size-space-500)',
+                }}
+                onClick={() => onSelect(option.id)}
+              >
+                <Text
+                  typography="heading6"
                   style={{
-                    backgroundColor:
-                      selectedValue === option.id ? '#3b82f6' : '#e5e7eb',
-                    color: selectedValue === option.id ? '#ffffff' : '#374151',
-                    borderRadius: 'var(--vapor-size-space-500)',
+                    color:
+                      selectedValue === option.id
+                        ? 'var(--vapor-color-button-foreground-primary)'
+                        : 'var(--vapor-color-foreground-secondary-100)',
                   }}
-                  onClick={() => onSelect(option.id)}
                 >
-                  {option.label}
-                </Button>
-              </Box>
+                  {showHash ? `# ${option.label}` : option.label}
+                </Text>
+              </Button>
             ))}
           </HStack>
         )}

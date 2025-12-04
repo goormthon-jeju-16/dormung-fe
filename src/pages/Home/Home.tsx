@@ -5,10 +5,6 @@ import { RouterPath } from '@/routes/path'
 const HomePage = () => {
   const navigate = useNavigate()
 
-  const handleNavigateToProfile = () => {
-    navigate(RouterPath.ONBOARDING_PROFILE)
-  }
-
   return (
     <VStack
       alignItems="center"
@@ -29,7 +25,7 @@ const HomePage = () => {
         size="lg"
         variant="fill"
         width="100%"
-        onClick={handleNavigateToProfile}
+        onClick={() => navigate('/onboardingprofile')}
       >
         프로필 입력하러 가기
       </Button>
