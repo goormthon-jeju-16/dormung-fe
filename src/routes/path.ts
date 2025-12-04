@@ -5,4 +5,5 @@ export const RouterPath = {
   LOADING: '/loading',
   RECOMMEND: '/recommend',
   MATCHING_SUCCESS: '/matching-success',
+  MAIN: '/main',
 }

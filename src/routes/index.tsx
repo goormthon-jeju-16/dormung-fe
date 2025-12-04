@@ -6,6 +6,7 @@ import OnboardingPreferencePage from '@/pages/Onboarding/OnboardingPreference'
 import LoadingPage from '@/pages/Meeting/LoadingPage'
 import RecommendPage from '@/pages/Meeting/RecommendPage'
 import MatchingSuccessPage from '@/pages/Meeting/MatchingSuccessPage'
+import MainPage from '@/pages/Main/MainPage'
 
 export const router = createBrowserRouter([
   {
@@ -31,5 +32,9 @@ export const router = createBrowserRouter([
   {
     path: RouterPath.MATCHING_SUCCESS,
     element: <MatchingSuccessPage />,
+  },
+  {
+    path: RouterPath.MAIN,
+    element: <MainPage />,
   },
 ])
