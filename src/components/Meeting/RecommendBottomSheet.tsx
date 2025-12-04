@@ -10,10 +10,13 @@ import {
 } from '@vapor-ui/core'
 import { MeetingProfileCard } from '@/components/Meeting/MeetingProfileCard'
 import { InfoCircleIcon } from '@vapor-ui/icons'
+import type { RecommendedMeeting } from '@/api/user'
 
 interface RecommendBottomSheetProps {
   isOpen: boolean
   onClose: () => void
+  meetingId?: number | null
+  meetings?: RecommendedMeeting[]
   leftButtonText?: string
   rightButtonText?: string
   onRightButtonClick?: () => void
@@ -22,10 +25,14 @@ interface RecommendBottomSheetProps {
 export const RecommendBottomSheet = ({
   isOpen,
   onClose,
+  meetingId,
+  meetings = [],
   leftButtonText = '닫기',
   rightButtonText = '수락하기',
   onRightButtonClick,
 }: RecommendBottomSheetProps) => {
+  const selectedMeeting = meetings.find(m => m.id === meetingId)
+  const meetingUsers = selectedMeeting?.meetingUsers || []
   return (
     <Sheet.Root
       open={isOpen}
@@ -75,7 +82,7 @@ export const RecommendBottomSheet = ({
         >
           <VStack>
             <Text typography="heading5" foreground="normal-200">
-              취미/여가 활동
+              {selectedMeeting?.name || '모임 정보'}
             </Text>
             <HStack alignItems="center" gap="var(--vapor-size-space-100)">
               <Text typography="body1" foreground="normal-200">
@@ -131,23 +138,20 @@ export const RecommendBottomSheet = ({
                 paddingBottom: 'var(--vapor-size-space-400)',
               }}
             >
-              <MeetingProfileCard avatarInitial="1" />
-              <MeetingProfileCard
-                avatarInitial="2"
-                residence="제주 3년 이상 거주"
-                gender="여성"
-                ageRange="20대"
-                location="제주시"
-                message="함께 즐거운 시간 보내요!"
-              />
-              <MeetingProfileCard
-                avatarInitial="3"
-                residence="제주 1년 이상 거주"
-                gender="남성"
-                ageRange="40대"
-                location="서귀포"
-                message="새로운 인연을 만들어요!"
-              />
+              {meetingUsers.length > 0 ? (
+                meetingUsers.map((mu, index) => (
+                  <MeetingProfileCard
+                    key={mu.user.id}
+                    nickname={mu.user.nickname}
+                    profileImagePath={mu.user.profileImagePath}
+                    avatarInitial={String(index + 1)}
+                  />
+                ))
+              ) : (
+                <Text typography="body2" foreground="secondary-200">
+                  유저 정보가 없습니다.
+                </Text>
+              )}
             </VStack>
             <Card.Footer
               style={{

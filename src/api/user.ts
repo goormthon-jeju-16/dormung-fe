@@ -85,3 +85,10 @@ export const getMeetingDetail = async (
   )
   return response.data.data
 }
+
+export const joinMeeting = async (meetingId: number): Promise<boolean> => {
+  const response = await apiClient.post<ApiResponse<boolean>>(
+    `/user/meeting/join/${meetingId}`
+  )
+  return response.data.data
+}

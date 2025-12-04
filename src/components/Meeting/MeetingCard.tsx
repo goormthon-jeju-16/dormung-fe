@@ -10,7 +10,6 @@ const getImageUrl = (imagePath: string): string => {
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
     return imagePath
   }
-  // public/로 시작하는 경우 public 폴더의 정적 파일로 처리
   if (imagePath.startsWith('public/')) {
     return `/${imagePath.replace('public/', '')}`
   }
@@ -30,7 +29,8 @@ interface MeetingCardProps {
   duration?: string
   memberCount?: number
   profileImages?: ProfileImageItem[]
-  onCheckClick?: () => void
+  meetingId?: number
+  onCheckClick?: (meetingId?: number) => void
 }
 
 export const MeetingCard = ({
@@ -38,6 +38,7 @@ export const MeetingCard = ({
   duration,
   memberCount = 5,
   profileImages = [],
+  meetingId,
   onCheckClick,
 }: MeetingCardProps) => {
   return (
@@ -133,7 +134,7 @@ export const MeetingCard = ({
           variant="fill"
           size="lg"
           width="100%"
-          onClick={onCheckClick}
+          onClick={() => onCheckClick?.(meetingId)}
           style={{
             paddingTop: '8px',
             paddingBottom: '8px',

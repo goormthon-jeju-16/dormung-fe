@@ -8,7 +8,6 @@ import { InfoCircleOutlineIcon } from '@vapor-ui/icons'
 import NavigationBar from '@/components/NavigationBar/NavigationBar'
 import { getMeetingDetail } from '@/api/user'
 import type { RecommendedMeeting } from '@/api/user'
-import { calculatePeriodLabel } from '@/lib/utils'
 
 const MatchingSuccessPage = () => {
   const { meetingId } = useParams<{ meetingId: string }>()
@@ -62,7 +61,7 @@ const MatchingSuccessPage = () => {
             ) : meeting ? (
               <MeetingCard
                 title={meeting.name}
-                duration={calculatePeriodLabel(meeting.createdAt)}
+                duration={meeting.periodLabel}
                 memberCount={meeting.meetingUsers.length}
                 profileImages={meeting.meetingUsers.map(mu => ({
                   id: mu.user.id,
