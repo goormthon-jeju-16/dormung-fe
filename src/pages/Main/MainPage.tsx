@@ -86,7 +86,7 @@ const MainPage = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             paddingTop: 'var(--vapor-size-space-500)',
-            paddingBottom: 'var(--vapor-size-space-500)',
+            paddingBottom: 'var(--vapor-size-space-900)',
             paddingLeft: 'var(--vapor-size-space-250)',
             paddingRight: 'var(--vapor-size-space-250)',
             gap: 'var(--vapor-size-space-600)',

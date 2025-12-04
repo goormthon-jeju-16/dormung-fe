@@ -22,9 +22,9 @@ const BoardWritePage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
-
-  // Board.tsx에서 전달된 boardId (실제로는 meetingId)
   const boardId = location.state?.boardId || ''
+  const meetingName =
+    (location.state as { meetingName?: string })?.meetingName || '게시판'
 
   const handleClose = () => {
     setIsExitSheetOpen(true)
@@ -56,7 +56,6 @@ const BoardWritePage = () => {
         content: content.trim(),
         meetingId: String(boardId),
       })
-      // 글 작성 성공 후 게시판 목록으로 이동
       navigate(RouterPath.BOARD.replace(':boardId', String(boardId)))
     } catch (error) {
       console.error('게시판 글 작성 중 오류가 발생했습니다:', error)
@@ -78,7 +77,7 @@ const BoardWritePage = () => {
         paddingRight: 'var(--vapor-size-space-250)',
       }}
     >
-      <Text typography="heading3">어쩌구 게시판</Text>
+      <Text typography="heading3">{meetingName}</Text>
       <VStack>
         <Flex alignItems="center" justifyContent="space-between">
           <IconButton
