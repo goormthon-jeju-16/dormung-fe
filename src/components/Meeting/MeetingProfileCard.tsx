@@ -1,21 +1,36 @@
 import { Card, Text, Box, VStack, HStack } from '@vapor-ui/core'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || 'https://goormthon-2.goorm.training/api'
+
+const getImageUrl = (imagePath: string): string => {
+  if (!imagePath) return ''
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath
+  }
+  if (imagePath.startsWith('public/')) {
+    return `/${imagePath.replace('public/', '')}`
+  }
+  if (imagePath.startsWith('/')) {
+    return `${API_BASE_URL}${imagePath}`
+  }
+  return `${API_BASE_URL}/${imagePath}`
+}
 
 interface MeetingProfileCardProps {
-  residence?: string
-  gender?: string
-  ageRange?: string
+  nickname?: string
+  profileImagePath?: string
   location?: string
   message?: string
   avatarInitial?: string
 }
 
 export const MeetingProfileCard = ({
-  residence = '제주 5년 이상 거주',
-  gender = '남성',
-  ageRange = '30대',
-  location = '성산',
-  message = '네트워킹 합시다!',
+  nickname,
+  profileImagePath,
+  location,
+  message,
   avatarInitial = '1',
 }: MeetingProfileCardProps) => {
   return (
@@ -44,23 +59,29 @@ export const MeetingProfileCard = ({
               border: '1px dashed var(--color-border-normal)',
             }}
           >
-            <AvatarFallback>{avatarInitial}</AvatarFallback>
+            {profileImagePath && (
+              <AvatarImage src={getImageUrl(profileImagePath)} alt={nickname} />
+            )}
+            <AvatarFallback>{nickname?.[0] || avatarInitial}</AvatarFallback>
           </Avatar>
         </Box>
 
         <VStack>
-          <Text typography="body2" foreground="normal-200">
-            • {residence}
-          </Text>
-          <Text typography="body2" foreground="normal-200">
-            • {gender}, {ageRange}
-          </Text>
-          <Text typography="body2" foreground="normal-200">
-            • 거주지: {location}
-          </Text>
-          <Text typography="body2" foreground="normal-200">
-            • 한마디: {message}
-          </Text>
+          {nickname && (
+            <Text typography="body2" foreground="normal-200">
+              닉네임: {nickname}
+            </Text>
+          )}
+          {location && (
+            <Text typography="body2" foreground="normal-200">
+              거주지: {location}
+            </Text>
+          )}
+          {message && (
+            <Text typography="body2" foreground="normal-200">
+              한마디: {message}
+            </Text>
+          )}
         </VStack>
       </HStack>
     </Card.Root>

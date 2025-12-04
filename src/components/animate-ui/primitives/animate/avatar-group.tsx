@@ -29,6 +29,8 @@ function AvatarContainer({
   sideOffset,
   align,
   alignOffset,
+  children,
+  style,
   ...props
 }: AvatarProps) {
   return (
@@ -44,7 +46,7 @@ function AvatarContainer({
           initial="initial"
           whileHover="hover"
           whileTap="hover"
-          style={{ position: 'relative', zIndex }}
+          style={{ position: 'relative', zIndex, ...style }}
         >
           <motion.div
             variants={{
@@ -53,16 +55,15 @@ function AvatarContainer({
             }}
             style={{
               borderRadius: '50%',
-              border: '1px solid black',
               overflow: 'hidden',
-              width: 40,
-              height: 40,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
             {...props}
-          />
+          >
+            {children}
+          </motion.div>
         </motion.div>
       </TooltipTrigger>
     </Tooltip>
@@ -95,6 +96,14 @@ function AvatarGroup({
   style,
   ...props
 }: AvatarGroupProps) {
+  const memberCount = React.Children.count(children)
+  const overlapAmount =
+    memberCount <= 5
+      ? -15
+      : memberCount <= 10
+        ? -15 - (memberCount - 5) * 6
+        : -45
+
   return (
     <TooltipProvider
       id={id}
@@ -125,7 +134,7 @@ function AvatarGroup({
             align={align}
             alignOffset={alignOffset}
             style={{
-              marginLeft: index === 0 ? 0 : '-12px',
+              marginLeft: index === 0 ? 0 : `${overlapAmount}px`,
             }}
           >
             {child}

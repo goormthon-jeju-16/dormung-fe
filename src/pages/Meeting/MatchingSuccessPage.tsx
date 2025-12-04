@@ -1,10 +1,40 @@
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Text, VStack } from '@vapor-ui/core'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { ChevronLeftOutlineIcon } from '@vapor-ui/icons'
 import { Callout } from '@vapor-ui/core'
 import NavigationBar from '@/components/NavigationBar/NavigationBar'
+import { getMeetingDetail } from '@/api/user'
+import type { RecommendedMeeting } from '@/api/user'
+import { RouterPath } from '@/routes/path'
 
 const MatchingSuccessPage = () => {
+  const navigate = useNavigate()
+  const { meetingId } = useParams<{ meetingId: string }>()
+  const [meeting, setMeeting] = useState<RecommendedMeeting | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchMeeting = async () => {
+      if (!meetingId) {
+        setIsLoading(false)
+        return
+      }
+      try {
+        setIsLoading(true)
+        const data = await getMeetingDetail(Number(meetingId))
+        setMeeting(data)
+      } catch (error) {
+        console.error('모임 정보 조회 실패:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchMeeting()
+  }, [meetingId])
+
   return (
     <>
       <div
@@ -25,7 +55,27 @@ const MatchingSuccessPage = () => {
             만남이 성사됐어요!
           </Text>
           <VStack gap="var(--vapor-size-space-200)">
-            <MeetingCard title="취미/여가 활동" duration="신규" />
+            {isLoading ? (
+              <Text typography="body1" foreground="secondary-200">
+                로딩 중...
+              </Text>
+            ) : meeting ? (
+              <MeetingCard
+                title={meeting.name}
+                duration={meeting.periodLabel}
+                memberCount={meeting.meetingUsers.length}
+                profileImages={meeting.meetingUsers.map(mu => ({
+                  id: mu.user.id,
+                  profileImagePath: mu.user.profileImagePath,
+                }))}
+                meetingId={meeting.id}
+                onCheckClick={() => {
+                  navigate(`${RouterPath.MAIN}?meetingId=${meeting.id}`)
+                }}
+              />
+            ) : (
+              <MeetingCard title="취미/여가 활동" duration="신규" />
+            )}
           </VStack>
           <div
             style={{
