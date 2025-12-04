@@ -1,15 +1,23 @@
 import { Text, VStack, Button } from '@vapor-ui/core'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { RouterPath } from '@/routes/path'
 import { MOCK_BOARDS } from '@/mockdata/boardData'
 import { BoardCard } from '@/pages/Board/components/BoardCard'
 
 const BoardPage = () => {
   const navigate = useNavigate()
+  const { boardId } = useParams<{ boardId: string }>()
 
   const handleBoardWrite = () => {
     navigate(RouterPath.BOARD_WRITE)
   }
+
+  const handleCardClick = (cardId: number) => {
+    if (boardId) {
+      navigate(`/board/${boardId}/${cardId}`)
+    }
+  }
+
   return (
     <>
       <div
@@ -34,6 +42,7 @@ const BoardPage = () => {
               title={board.title}
               content={board.content}
               commentCount={board.commentCount}
+              onClick={() => handleCardClick(board.id)}
             />
           ))}
         </VStack>
@@ -47,7 +56,7 @@ const BoardPage = () => {
           height: 'var(--vapor-size-demension-600)',
           position: 'fixed',
           bottom: 'var(--vapor-size-space-300)',
-          right: 'var(--vapor-size-space-300)',
+          right: 'var(--vapor-size-space-250)',
           borderRadius: 'var(--vapor-size-space-900)',
           paddingTop: 'var(--vapor-size-space-100)',
           paddingBottom: 'var(--vapor-size-space-100)',

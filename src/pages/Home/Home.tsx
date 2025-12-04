@@ -1,6 +1,14 @@
 import { Box, Button, VStack } from '@vapor-ui/core'
+import { useNavigate } from 'react-router-dom'
+import { RouterPath } from '@/routes/path'
 
 const HomePage = () => {
+  const navigate = useNavigate()
+
+  const handleNavigateToProfile = () => {
+    navigate(RouterPath.ONBOARDING_PROFILE)
+  }
+
   return (
     <VStack
       alignItems="center"
@@ -16,7 +24,13 @@ const HomePage = () => {
       <Box render={<p />}>
         우리 서비스는 어쩌구 입니다. <br /> 어떻게 서비스를 시작해보아요
       </Box>
-      <Button colorPalette="primary" size="lg" variant="fill" width="100%">
+      <Button
+        colorPalette="primary"
+        size="lg"
+        variant="fill"
+        width="100%"
+        onClick={handleNavigateToProfile}
+      >
         프로필 입력하러 가기
       </Button>
     </VStack>
