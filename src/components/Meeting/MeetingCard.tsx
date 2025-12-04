@@ -72,7 +72,7 @@ export const MeetingCard = ({
         <Button
           colorPalette="primary"
           variant="fill"
-          size="md"
+          size="lg"
           width="100%"
           onClick={onCheckClick}
           style={{
