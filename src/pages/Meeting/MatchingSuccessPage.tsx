@@ -3,6 +3,7 @@ import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { ChevronLeftOutlineIcon } from '@vapor-ui/icons'
 import { Callout } from '@vapor-ui/core'
 import { InfoCircleOutlineIcon } from '@vapor-ui/icons'
+import NavigationBar from '@/components/NavigationBar/NavigationBar'
 
 const MatchingSuccessPage = () => {
   return (
@@ -48,6 +49,7 @@ const MatchingSuccessPage = () => {
             </Callout.Root>
           </div>
         </VStack>
+        <NavigationBar />
       </div>
     </>
   )
