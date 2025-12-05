@@ -35,6 +35,7 @@ const OnboardingProfilePage = () => {
   const [categories, setCategories] = useState<
     Array<{ id: string; label: string }>
   >([])
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [regions, setRegions] = useState<
     Array<{ value: string; label: string }>
   >([])
@@ -191,7 +192,7 @@ const OnboardingProfilePage = () => {
       const selectedPeriodData = periods.find(p => p.id === selectedPeriod)
       const residencePeriod = selectedPeriodData?.label || ''
 
-      const userPreferredCategoryIds = selectedAge ? [Number(selectedAge)] : []
+      const userPreferredCategoryIds = selectedCategories.map(id => Number(id))
 
       const joinData = {
         residenceArea: selectedRegion || '',
@@ -271,10 +272,13 @@ const OnboardingProfilePage = () => {
         <SelectButtonGroup
           label="관심 카테고리는 무엇인가요?"
           options={categories}
-          selectedValue={selectedAge}
+          selectedValues={selectedCategories}
+          onSelectMultiple={setSelectedCategories}
           onSelect={setSelectedAge}
-          helperText="* 여러 항목을 선택할 수 있어요."
+          helperText={`
+            *여러 항목을 선택할 수 있어요.`}
           showHash={true}
+          multiple={true}
         />
       )}
       <VStack>
