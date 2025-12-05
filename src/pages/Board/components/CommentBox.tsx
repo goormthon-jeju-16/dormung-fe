@@ -48,7 +48,6 @@ export const CommentBox = ({ boardId, onCommentAdded }: CommentBoxProps) => {
         justifyContent: 'center',
         paddingLeft: 'var(--vapor-size-space-250)',
         paddingRight: 'var(--vapor-size-space-250)',
-        borderTop: '1px solid var(--color-gray-50)',
         backgroundColor: 'var(--color-background-normal)',
         boxSizing: 'border-box',
         zIndex: 10,
