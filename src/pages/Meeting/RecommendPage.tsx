@@ -50,7 +50,7 @@ const RecommendPage = () => {
         <VStack gap="var(--vapor-size-space-600)">
           <HStack alignItems="center" gap="var(--vapor-size-space-200)">
             <Box
-              onClick={() => navigate(RouterPath.HOME)}
+              onClick={() => navigate(RouterPath.MAIN)}
               style={{
                 cursor: 'pointer',
                 display: 'flex',
