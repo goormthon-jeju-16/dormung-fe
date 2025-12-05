@@ -88,6 +88,10 @@ const BoardPage = () => {
           paddingBottom: 'calc(var(--vapor-size-space-500) + 80px)',
           paddingLeft: 'var(--vapor-size-space-250)',
           paddingRight: 'var(--vapor-size-space-250)',
+          maxWidth: '393px',
+          margin: '0 auto',
+          width: '100%',
+          boxSizing: 'border-box',
         }}
       >
         <Text typography="heading3" marginBottom="$200">
@@ -106,26 +110,39 @@ const BoardPage = () => {
           ))}
         </VStack>
       </div>
-      <Button
-        colorPalette="primary"
-        size="sm"
-        variant="fill"
-        onClick={handleBoardWrite}
+      <div
         style={{
-          height: 'var(--vapor-size-demension-600)',
           position: 'fixed',
           bottom: 'calc(50px + var(--vapor-size-space-300))',
-          right: 'var(--vapor-size-space-250)',
-          borderRadius: 'var(--vapor-size-space-900)',
-          paddingTop: 'var(--vapor-size-space-100)',
-          paddingBottom: 'var(--vapor-size-space-100)',
-          paddingLeft: 'var(--vapor-size-space-300)',
-          paddingRight: 'var(--vapor-size-space-300)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '100%',
+          maxWidth: '393px',
+          paddingLeft: 'var(--vapor-size-space-250)',
+          paddingRight: 'var(--vapor-size-space-250)',
+          boxSizing: 'border-box',
           zIndex: 1001,
+          display: 'flex',
+          justifyContent: 'flex-end',
         }}
       >
-        + 글쓰기
-      </Button>
+        <Button
+          colorPalette="primary"
+          size="sm"
+          variant="fill"
+          onClick={handleBoardWrite}
+          style={{
+            height: 'var(--vapor-size-demension-600)',
+            borderRadius: 'var(--vapor-size-space-900)',
+            paddingTop: 'var(--vapor-size-space-100)',
+            paddingBottom: 'var(--vapor-size-space-100)',
+            paddingLeft: 'var(--vapor-size-space-300)',
+            paddingRight: 'var(--vapor-size-space-300)',
+          }}
+        >
+          + 글쓰기
+        </Button>
+      </div>
       <NavigationBar />
     </>
   )
