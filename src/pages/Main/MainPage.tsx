@@ -125,8 +125,8 @@ const MainPage = () => {
                     title={meeting.name}
                     duration=""
                     memberCount={meeting.meetingUsers.length}
-                    profileImages={meeting.meetingUsers.map(mu => ({
-                      id: mu.user.id,
+                    profileImages={meeting.meetingUsers.map((mu, index) => ({
+                      id: `${meeting.id}-${mu.user.id}-${index}`,
                       profileImagePath: mu.user.profileImagePath,
                     }))}
                     meetingId={meeting.id}

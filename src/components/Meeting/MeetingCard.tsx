@@ -20,7 +20,7 @@ const getImageUrl = (imagePath: string): string => {
 }
 
 interface ProfileImageItem {
-  id: number
+  id: number | string
   profileImagePath: string
 }
 
