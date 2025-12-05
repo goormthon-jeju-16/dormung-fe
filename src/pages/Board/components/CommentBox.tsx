@@ -44,11 +44,14 @@ export const CommentBox = ({ boardId, onCommentAdded }: CommentBoxProps) => {
         bottom: '80px',
         left: 0,
         right: 0,
+        display: 'flex',
+        justifyContent: 'center',
         paddingLeft: 'var(--vapor-size-space-250)',
         paddingRight: 'var(--vapor-size-space-250)',
         borderTop: '1px solid var(--color-gray-50)',
         backgroundColor: 'var(--color-background-normal)',
         boxSizing: 'border-box',
+        zIndex: 10,
       }}
     >
       <Box
@@ -57,7 +60,14 @@ export const CommentBox = ({ boardId, onCommentAdded }: CommentBoxProps) => {
         gap="$200"
         border="1px solid var(--color-gray-200)"
         borderRadius="var(--vapor-size-borderRadius-300)"
-        padding="$0"
+        paddingTop="var(--vapor-size-space-200)"
+        paddingBottom="var(--vapor-size-space-200)"
+        paddingLeft="var(--vapor-size-space-200)"
+        paddingRight="var(--vapor-size-space-200)"
+        style={{
+          width: '100%',
+          maxWidth: '393px',
+        }}
       >
         <TextInput
           placeholder="댓글을 입력해주세요"
