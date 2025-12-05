@@ -5,7 +5,7 @@ interface SelectButtonGroupProps {
   options: Array<{ id: string; label: string }>
   selectedValue?: string | null // 단일 선택
   selectedValues?: string[] // 다중 선택
-  onSelect: (value: string) => void
+  onSelect?: (value: string) => void
   onSelectMultiple?: (values: string[]) => void // 다중 선택
   gap?: string
   multiLine?: boolean

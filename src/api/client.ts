@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || 'https://goormthon-2.goorm.training/api'
+  // import.meta.env.VITE_API_URL || 'https://goormthon-2.goorm.training/api'
+  import.meta.env.VITE_API_URL || 'http://localhost:3021'
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

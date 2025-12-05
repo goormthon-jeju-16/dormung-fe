@@ -27,7 +27,6 @@ const OnboardingProfilePage = () => {
     null
   )
   const [selectedPeriod, setSelectedPeriod] = useState<string | null>(null)
-  const [selectedAge, setSelectedAge] = useState<string | null>(null)
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null)
   const [periods, setPeriods] = useState<Array<{ id: string; label: string }>>(
     []
@@ -173,7 +172,7 @@ const OnboardingProfilePage = () => {
     const isIntroductionValid = introduction.length >= 10 && !introductionError
 
     const isRequiredSelected =
-      selectedPeriod !== null && selectedAge !== null && selectedRegion !== null
+      selectedPeriod !== null && selectedCategories.length > 0 && selectedRegion !== null
 
     return isNicknameValid && isIntroductionValid && isRequiredSelected
   }
@@ -274,7 +273,6 @@ const OnboardingProfilePage = () => {
           options={categories}
           selectedValues={selectedCategories}
           onSelectMultiple={setSelectedCategories}
-          onSelect={setSelectedAge}
           helperText={`
             *여러 항목을 선택할 수 있어요.`}
           showHash={true}
