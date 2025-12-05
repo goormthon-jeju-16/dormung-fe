@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Text, VStack } from '@vapor-ui/core'
+import { HStack, Box, Text, VStack } from '@vapor-ui/core'
+import { ChevronLeftOutlineIcon } from '@vapor-ui/icons'
 import { MeetingCard } from '@/components/Meeting/MeetingCard'
 import { RecommendBottomSheet } from '@/components/Meeting/RecommendBottomSheet'
 import { getRecommendedMeetingList, joinMeeting } from '@/api/user'
@@ -47,9 +48,23 @@ const RecommendPage = () => {
         }}
       >
         <VStack gap="var(--vapor-size-space-600)">
-          <Text typography="heading3" foreground="normal-200">
-            이런 모임은 어떠세요?
-          </Text>
+          <HStack alignItems="center" gap="var(--vapor-size-space-200)">
+            <Box
+              onClick={() => navigate(RouterPath.HOME)}
+              style={{
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <ChevronLeftOutlineIcon
+                style={{ width: '32px', height: '32px' }}
+              />
+            </Box>
+            <Text typography="heading3" foreground="normal-200">
+              이런 모임은 어떠세요?
+            </Text>
+          </HStack>
           {isLoading ? (
             <LoadingPage />
           ) : (
