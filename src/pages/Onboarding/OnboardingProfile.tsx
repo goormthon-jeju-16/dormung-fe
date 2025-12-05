@@ -204,7 +204,7 @@ const OnboardingProfilePage = () => {
 
       const response = await apiClient.post('/user/join', joinData)
       if (response.status === 201) {
-        navigate(RouterPath.MAIN)
+        navigate(RouterPath.RECOMMEND)
       }
     } catch (error) {
       console.error('회원가입 실패:', error)
